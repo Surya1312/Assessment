@@ -14,7 +14,7 @@ public without sharing class LoanTriggerHandler extends TriggerHandler{
 
     public override void beforeUpdate(TriggerContext context){
         if(!TriggerStopper.stopLoanRecurring){
-            LoanServ.sendLoanToLendingSysOnUpdate((List<Loan__c>)context.newList);
+            LoanServ.sendLoanToLendingSysOnUpdate((List<Loan__c>)context.newList, (Map<Id,Loan__c>)context.oldMap);
         }
     }
 
