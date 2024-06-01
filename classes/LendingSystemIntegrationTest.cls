@@ -7,7 +7,9 @@ public class LendingSystemIntegrationTest {
         insert accs;
 
         List<Loan__c> loans = TestUtils.createLoans(accs[0].Id,1);
+        loans[0].LoanId__c = '23rf254t456d';
         insert loans;
+
     }
     
     @IsTest
