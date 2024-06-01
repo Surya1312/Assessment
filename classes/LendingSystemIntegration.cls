@@ -25,10 +25,10 @@ public with sharing class LendingSystemIntegration {
                 }
 
                 if(accIds.size()>0){
-                    Map<Id,Account> mapOfAccounts = new Map<Id,Account>([SELECT Id,AccountNumber from Account WHERE Id IN:accIds]);
+                    Map<Id,Account> mapOfAccounts = new Map<Id,Account>([SELECT Id,AccountNumber__c from Account WHERE Id IN:accIds]);
                     List<InsertRequestWrapper> insertWrapperList = new List<InsertRequestWrapper>();
                     for(Loan__c loan:insertedRecs){
-                        InsertRequestWrapper insertWrapper = new InsertRequestWrapper(INSERT_OPERATION,loan.Id,mapOfAccounts.get(loan.AccountId).AccountNumber,loan.Amount__c);
+                        InsertRequestWrapper insertWrapper = new InsertRequestWrapper(INSERT_OPERATION,loan.Id,mapOfAccounts.get(loan.AccountId).AccountNumber__c,loan.Amount__c);
                         insertWrapperList.add(insertWrapper);
                     }
                     if(!insertWrapperList.isEmpty()){
@@ -91,10 +91,10 @@ public with sharing class LendingSystemIntegration {
                 }
 
                 if(accIds.size()>0){
-                    Map<Id,Account> mapOfAccounts = new Map<Id,Account>([SELECT Id,AccountNumber from Account WHERE Id IN:accIds]);
+                    Map<Id,Account> mapOfAccounts = new Map<Id,Account>([SELECT Id,AccountNumber__c from Account WHERE Id IN:accIds]);
                     List<UpdateRequestWrapper> updateReqWrapperList = new List<UpdateRequestWrapper>();
                     for(Loan__c loan:updatedRecs){
-                        UpdateRequestWrapper reqWrapper = new UpdateRequestWrapper(UPDATE_OPERATION,loan.LoanId__c,mapOfAccounts.get(loan.AccountId),loan.Amount__c);
+                        UpdateRequestWrapper reqWrapper = new UpdateRequestWrapper(UPDATE_OPERATION,loan.LoanId__c,mapOfAccounts.get(loan.AccountId).AccountNumber__c,loan.Amount__c);
                         updateReqWrapperList.add(reqWrapper);
                     }            
                     if(updateReqWrapperList.size()>0){
